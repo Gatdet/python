@@ -12,10 +12,10 @@ class Television:
         all the variables will be private
         """
         
-        self.status = __status
-        self.muted = __muted
-        self.volume = __volume
-        self.channel = __channel
+        self.__status = __status
+        self.__muted = __muted
+        self.__volume = __volume
+        self.__channel = __channel
     
     def power(self) -> None:
 
@@ -23,10 +23,10 @@ class Television:
         Check if the status of the tv is true and if so set the status false
         else if the status is false set it true
         """
-        if self.status==True:
-            self.status=False
+        if self.__status==True:
+            self.__status=False
         else:
-            self.status=True
+            self.__status=True
     
     def mute(self) -> None:
 
@@ -35,31 +35,35 @@ class Television:
             if the mute function is true set it false and increase volume by one
             else if the mute function is false set it to true and set volume to 0
         """
-        if self.status:
-            if self.muted==True:
-                self.muted=False
-                self.volume+=1
+        if self.__status:
+            if self.__muted==True:
+                self.__muted=False
+                self.__volume+=1
             else:
-                self.muted=True
-                self.volume=0
+                self.__muted=True
+                self.__volume=0
         
     def channel_up(self) -> None:
         """
         Check if the status of the tv is true and if so:
             if the channel is less than the max channel increase it by one
         """
-        if self.status:
-            if self.channel < self.MAX_CHANNEL:
-                self.channel+=1
+        if self.__status:
+            if self.__channel < self.MAX_CHANNEL:
+                self.__channel+=1
+            else:
+                self.__channel=self.MIN_CHANNEL
     
     def channel_down(self) -> None:
         """
         Check if the status of the tv is true and if so:
             if the channel is greater than the min channel decrease it by one
         """
-        if self.status:
-            if self.channel > self.MIN_CHANNEL:
-                self.channel-=1
+        if self.__status:
+            if self.__channel > self.MIN_CHANNEL:
+                self.__channel-=1
+            else:
+                self.__channel = self.MAX_CHANNEL
 
     def volume_up(self) -> None:
         """
@@ -67,12 +71,12 @@ class Television:
             if the muted variable is false turn it true
             if the volume is lower than the maximum volume, turn it up 1 value.
         """
-        if self.status:
-            if self.muted==True:
-                self.volume+=1
-            self.muted=False
-            if self.volume < self.MAX_VOLUME:
-                self.volume+=1
+        if self.__status:
+            if self.__muted==True:
+                self.__volume+=1
+            self.__muted=False
+            if self.__volume < self.MAX_VOLUME:
+                self.__volume+=1
             
 
     def volume_down(self) -> None:
@@ -82,19 +86,19 @@ class Television:
             if the volume is higher than the minumum volume, turn it down 1 value.
         
         """
-        if self.status:
-            if self.muted==True:
-                self.volume-=1
-            self.muted=False
-            if self.volume > self.MIN_VOLUME:
-                self.volume-=1
-            self.volume = abs(self.volume)
+        if self.__status:
+            if self.__muted==True:
+                self.__volume-=1
+            self.__muted=False
+            if self.__volume > Television.MIN_VOLUME:
+                self.__volume-=1
+            self.__volume = abs(self.__volume)
            
             
         
     def __str__(self) -> str:
 
-        return f"Power = {self.status}, Channel = {self.channel}, Volume = {self.volume}"
+        return f"Power = {self.__status}, Channel = {self.__channel}, Volume = {self.__volume}"
 
     
         
